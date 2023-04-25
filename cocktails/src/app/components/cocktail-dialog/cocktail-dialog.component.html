@@ -1,0 +1,14 @@
+<h1 mat-dialog-title class="flex flex-row">
+    {{data.cocktail.name}}
+    <button class="ml-auto mt-2 float-right" mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</h1>
+
+<div mat-dialog-content>
+    <p class="wrap-text w-96 wrap-text">{{data.cocktail.instructions}}</p>
+
+    <ul class="list-disc ml-2 mr-2">
+        <li *ngFor="let ingredient of data.cocktail.ingredients">{{ingredient}}</li>
+    </ul>
+</div>   

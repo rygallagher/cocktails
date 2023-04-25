@@ -1,5 +1,5 @@
-<div class="flex justify-center pt-5">
-    <div class="flex-col w-1/2">
+<div class="flex justify-center pt-5 pb-5 h-full bg-orange-100">
+    <div class="flex-col w-1/2 p-8 border-2 bg-slate-50 overflow-auto">
         <form [formGroup]="searchForm">
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Search Ingredients</mat-label>
@@ -24,11 +24,22 @@
                     </mat-chip-row>
                 </mat-chip-grid>
             </mat-form-field>
+
+            <mat-slide-toggle formControlName="dataMode" class="mb-4">Toggle Data View</mat-slide-toggle>            
+
+            <code *ngIf="searchForm.controls.dataMode.value">
+                <pre class="border-2 bg-slate-50 rounded-md p-5">{{cocktails | json}}</pre>
+            </code>
+
+            <ng-container *ngIf="!searchForm.controls.dataMode.value">
+                <div class="flex flex-wrap gap-8 justify-center">
+                    <app-cocktail-card
+                        *ngFor="let cocktail of cocktails"
+                        [cocktail]="cocktail"
+                        (clickEvent)="openDescriptionCocktail(cocktail)">
+                    </app-cocktail-card>
+                </div>
+            </ng-container>
         </form>
-        
-        <code>
-            <pre class="bg-slate-100 rounded-md p-5">{{cocktails | json}}</pre>
-        </code>
-    </div>
-    
+    </div>    
 </div>

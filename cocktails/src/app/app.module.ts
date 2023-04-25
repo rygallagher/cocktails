@@ -20,11 +20,20 @@ import { NgxMaskPipe, NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { CocktailCardComponent } from './components/cocktail-card/cocktail-card.component';
+import { DoubleClickDirective } from './directives/double-click.directive';
+import { CocktailDialogComponent } from './components/cocktail-dialog/cocktail-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    SearchComponent,
+    CocktailCardComponent,
+    DoubleClickDirective,
+    CocktailDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    MatDialogModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
@@ -46,6 +55,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatOptionModule,
     MatListModule,
     MatChipsModule,
+    MatSlideToggleModule,
+    MatCardModule,
     NgxSkeletonLoaderModule,
     NgxMaskPipe, 
     NgxMaskDirective,

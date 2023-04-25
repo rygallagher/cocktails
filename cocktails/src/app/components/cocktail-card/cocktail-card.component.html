@@ -1,0 +1,11 @@
+<mat-card class="w-56 h-56" (click)="clickEvent.emit()">
+    <mat-card-header>
+        <mat-card-title>{{cocktail.name}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="overflow-hidden text-clip">
+        <ul class="list-disc ml-2 mr-2">
+            <li *ngFor="let ingredient of cocktail.ingredients">{{ingredient}}</li>
+        </ul>
+    </mat-card-content>
+</mat-card>

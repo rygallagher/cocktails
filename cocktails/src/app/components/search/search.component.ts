@@ -7,6 +7,8 @@ import { map, startWith } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { CocktailDialogComponent } from '../cocktail-dialog/cocktail-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-search',
@@ -33,6 +35,7 @@ export class SearchComponent {
 
     searchForm = new FormGroup({
         searchInput: new FormControl<string | null>(null),
+        dataMode: new FormControl<boolean>(false)
     });
 
     loading = false;
@@ -41,6 +44,7 @@ export class SearchComponent {
 
     constructor(
         private cocktailService: CocktailService,
+        private matDialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -97,9 +101,13 @@ export class SearchComponent {
     removeIngredient(index: number) {
         this.ingredients.splice(index, 1);
         
-        if (this.ingredients.length > 0) {
-            this.loadCocktails();
-        }
+        this.loadCocktails();
+    }
+
+    openDescriptionCocktail(cocktail: Cocktail): void {
+        this.matDialog.open(CocktailDialogComponent, {
+            data: {cocktail: cocktail},
+        });
     }
 
     private _filter(name: string): string[] {
