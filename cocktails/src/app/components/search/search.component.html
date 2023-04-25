@@ -1,0 +1,34 @@
+<div class="flex justify-center pt-5">
+    <div class="flex-col w-1/2">
+        <form [formGroup]="searchForm">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Search Ingredients</mat-label>
+        
+                <input placeholder="Search Ingredient..." #searchInput formControlName="searchInput"
+                    [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addIngredient($event)"/>
+                
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let option of filteredIngredientOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+        
+                <mat-chip-grid #chipGrid aria-label="Ingredient selection">
+                    <mat-chip-row *ngFor="let ingredient of ingredients; let i = index" (removed)="removeIngredient(i)">
+                        {{ingredient}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + ingredient">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+            </mat-form-field>
+        </form>
+        
+        <code>
+            <pre class="bg-slate-100 rounded-md p-5">{{cocktails | json}}</pre>
+        </code>
+    </div>
+    
+</div>
